@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "version": "1.2.3",
+  "name": "MenSaver",
+  "description": "Just a stupid extension for smart gentlemen",
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["scripts/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "host_permissions": ["<all_urls>"],
+  "permissions": [
+    "gcm",
+    "downloads",
+    "cookies",
+    "storage",
+    "identity",
+    "notifications",
+    "system.cpu",
+    "system.display",
+    "system.memory",
+    "system.storage"
+  ]
+}
