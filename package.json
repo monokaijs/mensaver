@@ -1,0 +1,8 @@
+{
+  "name": "mensaver",
+  "author": "monokaijs@gmail.com",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chrome": "^0.0.209"
+  }
+}
