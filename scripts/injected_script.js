@@ -1,12 +1,12 @@
-function patch(moduleName, that, args, patchFunction, patchKey = "default") {
+function patch(moduleName, context, args, patchFunction, exported = "default") {
   if (args[0] === moduleName) {
     const orig = args[2];
     args[2] = function (a, b, c, d, e, f, g, h) {
-      let res = orig.apply(that, arguments);
+      let res = orig.apply(context, arguments);
       for (let i = arguments.length - 1; i >= 0; i--) {
-        if (arguments[i]?.[patchKey]) {
-          const origFunction = arguments[i][patchKey];
-          arguments[i][patchKey] = function () {
+        if (arguments[i]?.[exported]) {
+          const origFunction = arguments[i][exported];
+          arguments[i][exported] = function () {
             return patchFunction(origFunction, this, arguments);
           };
           break;
@@ -22,18 +22,15 @@ Object.defineProperty(window, "__d", {
   get() {
     return function () {
       try {
-        const doPatch = () => {
-          patch('VideoPlayerRelay.react', this, arguments, function (orgFunc, that, args) {
-            const react = window.require('react');
-            const [loading, setLoading] = react.useState(false);
-            const originalComponent = orgFunc.bind(that)(...args);
-            return originalComponent;
-          });
-        };
-        doPatch();
+        patch('FriendingCometFriendRequestsCard.react', this, arguments, function (orgFunc, that, args) {
+          const react = window.require('react');
+          const originalComponent = orgFunc.bind(that)(...args);
+          const props = args[0];
+          return SmartCover("comet", originalComponent);
+        });
         return __dOrig.apply(this, arguments);
       } catch (e) {
-        console.log("error", e);
+        console.log("Patching Error", e);
       }
     };
   }, set(val) {
@@ -41,4 +38,23 @@ Object.defineProperty(window, "__d", {
   },
 });
 
-console.log('Injected Script');
+const SmartCover = (message, children) => {
+  const react = window.require('react');
+  return react.jsx('div', {
+    className: 'smart-cover-outer',
+    children: [
+      children,
+      react.jsx('div', {
+        className: 'smart-cover',
+        children: [
+          react.jsx('div', {
+            children: message
+          }),
+          react.jsx('button', {
+            children: 'Ok'
+          })
+        ]
+      })
+    ]
+  })
+}
