@@ -17,3 +17,8 @@ Your d*ck will rest in your girlfriend's peace.
 - [ ] Hide girls' photo on newsfeed.
 
 **Especially, you will be highly warned when press accept a girl who's in your girlfriend's friendlist.**
+
+### Thanks to:
+- [@shz-code](https://github.com/shz-code) for his beautiful [Delivery Hero](https://github.com/shz-code/delivery-hero) template.
+- [@lxieyang](https://github.com/lxieyang) for the base of [Chrome Extension Boilerplate for React](https://github.com/lxieyang/chrome-extension-boilerplate-react).
+
