@@ -2,7 +2,7 @@ const insertScript = (path) => {
   const script = window.document.createElement('script');
   script.type = 'module';
   script.src = chrome.runtime.getURL(path);
-  const doc = window.document.body || window.document.head || window.document.documentElement;
+  const doc = window.document.head || window.document.body || window.document.documentElement;
   doc.prepend(script);
 }
 const insertStyle = (path) => {
@@ -12,6 +12,6 @@ const insertStyle = (path) => {
   const doc = window.document.body || window.document.head || window.document.documentElement;
   doc.prepend(link);
 }
-insertScript('/scripts/injected_script.js');
-insertStyle('/scripts/injected_styles.css');
+insertScript('/extraScripts/injected_script.js');
+insertStyle('/extraScripts/injected_styles.css');
 

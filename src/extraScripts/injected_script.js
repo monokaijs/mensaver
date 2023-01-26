@@ -26,6 +26,8 @@ Object.defineProperty(window, "__d", {
           const react = window.require('react');
           const originalComponent = orgFunc.bind(that)(...args);
           const props = args[0];
+          const user = props.user;
+          getUserMetaInfo(user.id).then(console.log);
           return SmartCover("comet", originalComponent);
         });
         patch('FriendingCometPYMKCard.react', this, arguments, function (orgFunc, that, args) {
@@ -70,16 +72,17 @@ const SmartCover = (message, children) => {
   })
 }
 
-const getUserMetaInfo = (uid) => {
-  return graphQl('6090218654334102', {
+const getUserMetaInfo = async (uid) => {
+  const response = await graphQl('6090218654334102', {
     "actionBarRenderLocation": "WWW_COMET_HOVERCARD",
     "context": "DEFAULT",
-    "entityID": "100089470155547",
+    "entityID": uid,
     "includeTdaInfo": false,
     "scale": 1,
     "__relay_internal__pv__GlobalPanelEnabledrelayprovider": false,
     "__relay_internal__pv__CometGlobalPanelEMCopresencerelayprovider": false
-  })
+  }).then(r => r.json());
+  return response.data;
 }
 
 const getMutualFriends = (uid) => {
