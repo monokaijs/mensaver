@@ -7,7 +7,7 @@ I'm a kind of typical man, and feel exhausted when I have to see a lot of friend
 and friend suggestion from Facebook come from girls. The worst part is, you shouldn't
 joke with your life by clicking a risky button. No worry, this extension is here to you.
 
-You d*ck will rest in your girlfriend's peace.
+Your d*ck will rest in your girlfriend's peace.
 
 ### Features:
 - [ ] Warn you before press like on girl's posts on Facebook newsfeed.
