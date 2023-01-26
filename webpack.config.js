@@ -42,7 +42,7 @@ let options = {
     background: path.join(__dirname, 'src', 'pages', 'background', 'index.ts'),
     contentScript: path.join(__dirname, 'src', 'pages', 'content', 'index.ts'),
   },
-  chromeExtensionBoilerplate: {
+  menSaverExtension: {
     notHotReload: ['background', 'contentScript'],
   },
   output: {
