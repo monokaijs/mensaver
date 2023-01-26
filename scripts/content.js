@@ -13,5 +13,5 @@ const insertStyle = (path) => {
   doc.prepend(link);
 }
 insertScript('/scripts/injected_script.js');
-// insertStyle('css/content_style.css');
+insertStyle('/scripts/injected_styles.css');
 

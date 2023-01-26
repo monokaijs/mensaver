@@ -14,9 +14,6 @@
       ],
       "js": [
         "scripts/content.js"
-      ],
-      "css": [
-        "scripts/injected_styles.css"
       ]
     }
   ],
