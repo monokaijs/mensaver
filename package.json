@@ -6,7 +6,12 @@
     "start": "node build-utils/webserver.js",
     "prettier": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "antd": "^5.1.5",
+    "axios": "^1.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@types/chrome": "^0.0.209",
