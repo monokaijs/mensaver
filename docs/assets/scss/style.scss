@@ -1,0 +1,16 @@
+// Import all partial scss files 
+@import './config/root';
+@import './base/base';
+@import './layout/layout';
+@import './components/btn';
+@import './components/header';
+@import './components/home';
+@import './components/about';
+@import './components/security';
+@import './components/services';
+@import './components/app';
+@import './components/contact';
+@import './components/footer';
+@import './components/scroll';
+@import './theme/theme';
+@import './components/mediaqueries';

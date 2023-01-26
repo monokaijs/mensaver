@@ -1,0 +1,151 @@
+/* For small devices */
+@media screen and (max-width: 360px){
+    .svg__img{
+        width: 100%;
+    }
+
+    .section{
+        padding: 3.5rem 0 1rem;
+    }
+
+    .services__img{
+        width: 100px;
+    }
+
+    .app__btns{
+        grid-template-columns: max-content;
+    }
+}
+
+/* For medium devices */
+@media screen and (min-width: 576px){
+    .svg__img{
+        width: 100%;
+    }
+
+    .section__title-center{
+        text-align: initial;
+    }
+
+    .app,
+    .footer{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home__img{
+        order: 1;
+    }
+
+    .home,
+    .about,
+    .security,
+    .app,
+    .contact{
+        align-items: center;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about__data,
+    .security__desc,
+    .app__data,
+    .contact__desc{
+        text-align: left;
+    }
+
+    .about__img,
+    .app__img{
+        order: -1;
+    }
+}
+
+@media screen and (min-width: 767px){
+    .section.container{
+        margin: auto;
+        padding: 6rem var(--mb-1-5) 2rem var(--mb-1-5);
+    }
+
+    .container{
+        margin: auto;
+        padding: var(--mb-1-5);
+    }
+
+    .nav{
+        height: calc(var(--header-height) + 1.5rem);
+
+        &__list{
+            flex-direction: row;
+            column-gap: 2.5rem;
+        }
+        .ham__btn{
+            display: none;
+        }
+    }
+
+    .theme__toggle{
+        position: initial;
+    }
+
+    .home{
+        padding: 6rem 0 2rem;
+    }
+
+    .app__btns{
+        justify-content: initial;
+    }
+}
+
+/* For large devices */
+@media screen and (min-width: 968px){
+    .btn__header{
+        display: block;
+    }
+
+    .svg__img{
+        width: 470px;
+    }
+
+    .about,
+    .security,
+    .app,
+    .contact{
+        column-gap: 6rem;
+    }
+
+    .services{
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .contact{
+        grid-template-columns: 3fr 2fr 1.25fr;
+    }
+
+    .footer{
+        grid-template-columns: repeat(5, 1fr);
+        &__social{
+            align-items: flex-start;
+
+            &-link{
+                font-size: 1.45rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .home{
+        &__img{
+            width: 540px;
+        }
+        &__desc{
+            padding-right: 5rem;
+        }
+    }
+
+    .footer{
+        column-gap: 3rem;
+    }
+
+    .scrollup{
+        right: 2rem;
+    }
+}

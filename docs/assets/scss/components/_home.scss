@@ -1,0 +1,11 @@
+.home{
+    row-gap: 3rem;
+    &__title{
+        font-size: var(--biggest-font-size);
+        font-weight: var(--font-bold);
+        margin-bottom: var(--mb-0-75);
+    }
+    &__desc{
+        margin-bottom: var(--mb-2);
+    }
+}
