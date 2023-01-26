@@ -3,8 +3,12 @@
   "version": "1.2.3",
   "name": "MenSaver",
   "description": "Just a stupid extension for smart gentlemen",
+  "options_page": "pages/options.html",
   "background": {
     "service_worker": "scripts/background.js"
+  },
+  "action": {
+    "default_title": "MenSaver"
   },
   "content_scripts": [
     {
