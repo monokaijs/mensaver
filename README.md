@@ -16,4 +16,4 @@ Your d*ck will rest in your girlfriend's peace.
 - [ ] Automatically send LOVE (<3) reaction to your girlfriend's posts. Be the first one who press this button, always.
 - [ ] Hide girls' photo on newsfeed.
 
-** Especially, you will be highly warned when press accept a girl who's in your girlfriend's friendlist.
+**Especially, you will be highly warned when press accept a girl who's in your girlfriend's friendlist.**
