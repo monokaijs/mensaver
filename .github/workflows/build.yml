@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -23,38 +25,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: install deps
       run: yarn install
-    - name: version
-      run: echo "::set-output name=version::$(./bin/azblogfilter --version)"
-      id: version
+    - name: build extension
+      run: yarn build
+    - name: zip artifacts
+      run: zip -r ./build.zip ./build
     - name: release
-      uses: actions/create-release@v1
-      id: create_release
+      uses: softprops/action-gh-release@v1
       with:
-        draft: false
-        prerelease: false
-        release_name: ${{ steps.version.outputs.version }}
-        tag_name: ${{ github.ref }}
-        body_path: CHANGELOG.md
+        files: ./build.zip
       env:
-        GITHUB_TOKEN: ${{ github.token }}
-    - name: build artifacts
-      run: yarn build && zip -r build.zip ./build
-    - name: upload linux artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./build.zip
-        asset_name: mensaver-build.zip
-        asset_content_type: application/gzip
-    - name: upload artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./bin/azblogfilter.darwin-amd64.tar.gz
-        asset_name: azblogfilter.darwin-amd64.tar.gz
-        asset_content_type: application/gzip
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
