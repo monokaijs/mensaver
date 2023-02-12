@@ -1,13 +1,18 @@
-import {Button, DatePicker, Space } from "antd";
 import React from "react";
+import {HashRouter, Route, Routes} from "react-router-dom";
+import AppLayout from "../components/layouts/AppLayout";
+import Home from "./Home";
 
 const AppViews = () => {
   return (
     <div>
-      <Space>
-        <DatePicker />
-        <Button type="primary">Primary Button</Button>
-      </Space>
+      <HashRouter>
+        <Routes>
+          <Route path={'/'} element={<AppLayout/>}>
+            <Route index element={<Home/>}/>
+          </Route>
+        </Routes>
+      </HashRouter>
     </div>
   )
 };
