@@ -5,15 +5,13 @@ import Home from "./Home";
 
 const AppViews = () => {
   return (
-    <div>
-      <HashRouter>
-        <Routes>
-          <Route path={'/'} element={<AppLayout/>}>
-            <Route index element={<Home/>}/>
-          </Route>
-        </Routes>
-      </HashRouter>
-    </div>
+    <HashRouter>
+      <Routes>
+        <Route path={'/'} element={<AppLayout/>}>
+          <Route index element={<Home/>}/>
+        </Route>
+      </Routes>
+    </HashRouter>
   )
 };
 

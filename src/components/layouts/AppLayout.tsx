@@ -7,7 +7,9 @@ export default function AppLayout() {
   return (
     <Layout className={'app-layout'}>
       <AppHeader/>
-      <Outlet/>
+      <Layout.Content>
+        <Outlet/>
+      </Layout.Content>
     </Layout>
   )
 }
