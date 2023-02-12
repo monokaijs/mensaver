@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div>
+    <div style={{marginTop: 32}}>
       Home is here!
     </div>
   )
