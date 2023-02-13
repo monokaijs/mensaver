@@ -15,9 +15,26 @@
 }
 
 .app-links {
-    padding: 16px 0;
     background-color: white;
     box-shadow: 0px 14px 48px 0px rgba(0,0,0,0.04);
     -webkit-box-shadow: 0px 14px 48px 0px rgba(0,0,0,0.04);
     -moz-box-shadow: 0px 14px 48px 0px rgba(0,0,0,0.04);
+}
+
+.app-links .boxed-layout-inner {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+}
+
+.app-links .link {
+    display: flex;
+    margin-right: 32px;
+    height: 50px;
+    box-sizing:border-box;
+    align-items: center;
+}
+
+.app-links .link:hover {
+    border-bottom: 2px solid black;
 }
