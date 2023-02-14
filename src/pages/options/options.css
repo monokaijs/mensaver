@@ -1,3 +1,11 @@
+.page {
+    margin-top: 32px;
+}
+
+.page.no-margin {
+    margin-top: 0;
+}
+
 #app-container, .options-page, .app-layout {
     height: 100%
 }
