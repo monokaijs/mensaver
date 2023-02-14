@@ -1,3 +1,11 @@
+.page {
+    margin-top: 32px;
+}
+
+.page.no-margin {
+    margin-top: 0;
+}
+
 #app-container, .options-page, .app-layout {
     height: 100%
 }
@@ -37,4 +45,14 @@
 
 .app-links .link:hover {
     border-bottom: 2px solid black;
+}
+
+.settings-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings-line span {
+    margin-left: 16px;
 }
