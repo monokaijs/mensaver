@@ -1,0 +1,39 @@
+name: Build Extension
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: install deps
+      run: yarn install
+    - name: build extension
+      run: yarn build
+    - name: zip artifacts
+      run: zip -r ./build.zip ./build
+    - name: release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ./build.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
