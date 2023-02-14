@@ -46,3 +46,13 @@
 .app-links .link:hover {
     border-bottom: 2px solid black;
 }
+
+.settings-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings-line span {
+    margin-left: 16px;
+}
