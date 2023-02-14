@@ -1,18 +1,19 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-
-interface AppSettings {
-  warnGirlsFR: boolean,
-}
+import {loadAppSettings} from "../actions/app.actions";
 
 interface AppState {
-  settings: AppSettings
+  settings: AppSettings,
+  isBooting: boolean,
 }
 
-const initialState: AppState = {
+export const defaultAppState = {
   settings: {
     warnGirlsFR: false,
-  }
+  },
+  isBooting: true,
 };
+
+const initialState: AppState = defaultAppState;
 
 export const appSlice = createSlice({
   name: 'app',
@@ -20,6 +21,12 @@ export const appSlice = createSlice({
   reducers: {
   },
   extraReducers: builder => {
+    builder.addCase(loadAppSettings.pending, (state) => {
+      state.isBooting = true;
+    }).addCase(loadAppSettings.fulfilled, (state, action) => {
+      state.isBooting = false;
+      state.settings = action.payload;
+    })
   }
 });
 

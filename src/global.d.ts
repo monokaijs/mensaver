@@ -1,0 +1,3 @@
+interface AppSettings {
+  warnGirlsFR: boolean,
+}
