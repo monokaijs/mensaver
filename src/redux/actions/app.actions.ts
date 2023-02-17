@@ -6,3 +6,8 @@ import {RootState} from "../store";
 export const loadAppSettings = createAsyncThunk<AppSettings, void, {state: RootState}>('app/load-settings', async () => {
   return await StorageService.getData('app-settings', defaultAppState.settings) as AppSettings;
 });
+
+export const setAppSettings = createAsyncThunk<AppSettings, AppSettings, {state: RootState}>('app/set-settings', async (settings) => {
+  await StorageService.setData('app-settings', settings);
+  return settings;
+});

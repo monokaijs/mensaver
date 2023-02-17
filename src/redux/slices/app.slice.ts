@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {loadAppSettings} from "../actions/app.actions";
+import {loadAppSettings, setAppSettings} from "../actions/app.actions";
 
 interface AppState {
   settings: AppSettings,
@@ -25,6 +25,8 @@ export const appSlice = createSlice({
       state.isBooting = true;
     }).addCase(loadAppSettings.fulfilled, (state, action) => {
       state.isBooting = false;
+      state.settings = action.payload;
+    }).addCase(setAppSettings.fulfilled, (state, action) => {
       state.settings = action.payload;
     })
   }
