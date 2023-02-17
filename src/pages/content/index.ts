@@ -16,3 +16,6 @@ insertScript('/scripts/injected_script.js');
 insertStyle('/scripts/injected_styles.css');
 console.log('Content script loaded');
 
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log(message);
+});
