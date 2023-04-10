@@ -162,3 +162,27 @@ const graphQl = (docId, variables) => {
     }),
   });
 }
+
+var __menSaverAppSettings = {};
+var chromeMessageListeners = {};
+window.document.addEventListener('chrome-message', e => {
+  console.log(e);
+  const event = e.detail;
+  const action = event.action;
+  if (chromeMessageListeners[action] && chromeMessageListeners[action].length) {
+    for (let fn of chromeMessageListeners[action]) {
+      if (fn && typeof fn === 'function') {
+        fn(event);
+      }
+    }
+  }
+  if (action === 'set-settings') {
+    __menSaverAppSettings = event.settings;
+  }
+});
+function addChromeMessageListener(action, fn) {
+  chromeMessageListeners[action] = chromeMessageListeners[action] ? [
+    ...chromeMessageListeners[action],
+    fn
+  ] : [fn];
+}

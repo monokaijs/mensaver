@@ -1,3 +1,6 @@
+import StorageService from "../../services/StorageService";
+import {defaultAppState} from "../../redux/slices/app.slice";
+
 const insertScript = (path: string) => {
   const script = window.document.createElement('script');
   script.type = 'module';
@@ -14,8 +17,22 @@ const insertStyle = (path: string) => {
 }
 insertScript('/scripts/injected_script.js');
 insertStyle('/scripts/injected_styles.css');
-console.log('Content script loaded');
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log(message);
+  // listen for changes
+  if (message && message.action) {
+    const event = new CustomEvent("chrome-message", {detail: message});
+    window.document.dispatchEvent(event);
+  }
+});
+// load settings at startup
+StorageService.getData('app-settings', defaultAppState.settings).then(appSettings => {
+  console.log('app-settings', appSettings);
+  const event = new CustomEvent("chrome-message", {
+    detail: {
+      action: 'set-settings',
+      settings: appSettings
+    }
+  });
+  window.document.dispatchEvent(event);
 });
