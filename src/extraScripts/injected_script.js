@@ -17,24 +17,63 @@ function patch(moduleName, context, args, patchFunction, exported = "default") {
   }
 }
 
+console.log('works');
+
+const getProfileGender = (userId) => {
+  console.log('get-profile-gender', userId);
+  return new Promise((resolve, reject) => {
+    getUserMetaInfo(userId).then(data => {
+      if (data && data.node && data.node['comet_hovercard_renderer'] && data.node['comet_hovercard_renderer'].user) {
+        const user = data.node['comet_hovercard_renderer'].user;
+        const primaryActions = user['primaryActions'] || [];
+        const friendAction = primaryActions.find(x => x['__typename'] === 'ProfileActionFriendRequest');
+        const profileAction = friendAction?.client_handler?.profile_action;
+        const profileOwner = profileAction?.restrictable_profile_owner;
+        console.log('profile-owner', profileOwner);
+        if (profileOwner) {
+          resolve(profileOwner.gender);
+        } else {
+          reject();
+        }
+      } else {
+        reject();
+      }
+    });
+  });
+}
+
 let __dOrig = window.__d;
 Object.defineProperty(window, "__d", {
   get() {
     return function () {
       try {
         patch('FriendingCometFriendRequestsCard.react', this, arguments, function (orgFunc, that, args) {
+          console.log('FriendingCometFriendRequestsCard.react');
           const react = window.require('react');
           const originalComponent = orgFunc.bind(that)(...args);
           const props = args[0];
           const user = props.user;
-          getUserMetaInfo(user.id).then(console.log);
-          return SmartCover("comet", originalComponent);
+          const [showCover, setShowCover] = react.useState(false);
+          const [gender, setGender] = react.useState('');
+          react.useEffect(() => {
+            getProfileGender(user.id).then(g => {
+              setGender(g);
+            });
+          }, []);
+          return SmartCover(gender, originalComponent);
         });
         patch('FriendingCometPYMKCard.react', this, arguments, function (orgFunc, that, args) {
           const react = window.require('react');
           const originalComponent = orgFunc.bind(that)(...args);
           const props = args[0];
-          return SmartCover("Cảnh báo, người giới tính NAM này có trong danh sách bạn bè của Sếp bạn. Bạn có CHẮC CHẮN muốn thêm người này vào danh sách bạn bè?", originalComponent);
+          const user = props.user;
+          const [gender, setGender] = react.useState('');
+          react.useEffect(() => {
+            getProfileGender(user.id).then(g => {
+              setGender(g);
+            });
+          }, []);
+          return SmartCover(gender, originalComponent);
         });
         return __dOrig.apply(this, arguments);
       } catch (e) {
@@ -46,9 +85,10 @@ Object.defineProperty(window, "__d", {
   },
 });
 
-const SmartCover = (message, children) => {
+const SmartCover = (gender, children) => {
   const react = window.require('react');
   const [cover, setCover] = react.useState(true);
+  if (gender === 'MALE') return children;
   return react.jsx('div', {
     className: 'smart-cover-outer',
     children: [
@@ -58,10 +98,10 @@ const SmartCover = (message, children) => {
         children: [
           react.jsx('div', {
             className: 'message',
-            children: message
+            children: 'CẢNH BÁO!!! Đây là gái, có người yêu rồi thì đừng dại bấm vào'
           }),
           react.jsx('button', {
-            children: 'Tiếp tục',
+            children: 'Kệ tao',
             onClick: () => {
               setCover(false);
             }
