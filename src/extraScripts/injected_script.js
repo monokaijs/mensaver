@@ -84,16 +84,18 @@ Object.defineProperty(window, "__d", {
             if (!storyId) return;
             (async () => {
               const decodedStoryId = atob(storyId);
-              console.log('decoded', decodedStoryId);
               if (decodedStoryId.startsWith('S:_I') && !decodedStoryId.includes('/')) {
                 authorId = decodedStoryId.replace('S:_I', '').split(':')[0];
               } else {
                 const account = await getPostAuthor(storyId);
                 authorId = account.id;
               }
-              const userGender = await getProfileGender(authorId);
-              console.log('gender', userGender);
-              setGender(userGender);
+              try {
+                const userGender = await getProfileGender(authorId);
+                setGender(userGender);
+              } catch (e) {
+                setGender('MALE');
+              }
             })();
           }, []);
           return SmartCover(gender, originalComponent, true);
